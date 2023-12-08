@@ -1,4 +1,4 @@
-import {SET_VALUE} from "./action_types"
+import {LOSE, SET_VALUE, WIN} from "./action_types"
 
 export const setValueActionCreater = (value,indexArr) => {
     return {
@@ -8,3 +8,14 @@ export const setValueActionCreater = (value,indexArr) => {
     }
 }
 
+export const loseActionCreater = () => {
+    return {
+        type: LOSE
+    }
+}
+
+export const winActionCreater = () => {
+    return {
+        type: WIN
+    }
+}

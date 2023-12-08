@@ -1,4 +1,4 @@
-import {SET_VALUE} from "./action_types"
+import { LOSE, SET_VALUE, WIN } from "./action_types"
 
 const data = {
     level: 0,
@@ -71,20 +71,44 @@ const initialState = {
 }
 
 
-const reducer = (state = initialState, action = {type: ""}) => {
+const reducer = (state = initialState, action = { type: "" }) => {
     switch (action.type) {
         case SET_VALUE:
-            const newState =  {
-                ...state, 
+            if (state.matrix.start[action.indexArr[0]][action.indexArr[1]] !== 0) {
+                return state
+            }
+            const newState = {
+                ...state,
                 matrix: {
                     ...state.matrix,
                     start: [...state.matrix.start]
                 }
             }
-            if (state.matrix.end[action.indexArr[0]][action.indexArr[1]] === +action.value){
+            if (state.matrix.end[action.indexArr[0]][action.indexArr[1]] === +action.value) {
                 newState.matrix.start[action.indexArr[0]][action.indexArr[1]] = +action.value
+            } else {
+                newState.errors++
             }
             return newState
+        case LOSE:
+            return {
+                ...state,
+                matrix: {
+                    ...state.matrix,
+                    start: JSON.parse(JSON.stringify(data.matrix[data.level][1]))
+                },
+                errors: 0
+            }
+        case WIN:
+            data.level = (data.level + 1) % data.matrix.length 
+            return {
+                ...state,
+                matrix: {
+                    ...state.matrix,
+                    start: JSON.parse(JSON.stringify(data.matrix[data.level][1]))
+                },
+                errors: 0
+            }
     }
     return state
 }
