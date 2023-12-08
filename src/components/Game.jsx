@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { setValueActionCreater, loseActionCreater, winActionCreater} from "../store/action_creators";
 import { useNavigate } from "react-router-dom";
 
 
@@ -12,17 +11,17 @@ const Game = props => {
                 return 
             }
         }
-        props.dispach(winActionCreater())
+        props.win()
         navigate("/win")
     }
     const setValue = event => {
-        props.dispach(setValueActionCreater(event.target.textContent, indexArr))
+        props.setValue(event.target.textContent, indexArr)
     }
     const islose = () => {
         if (props.errors<3) {
             return
         }
-        props.dispach(loseActionCreater())
+        props.lose()
         navigate("/gameover")
     }
     useEffect(()=> {

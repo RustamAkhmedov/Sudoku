@@ -71,7 +71,7 @@ const initialState = {
 }
 
 
-const reducer = (state = initialState, action = { type: "" }) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_VALUE:
             if (state.matrix.start[action.indexArr[0]][action.indexArr[1]] !== 0) {
@@ -104,13 +104,14 @@ const reducer = (state = initialState, action = { type: "" }) => {
             return {
                 ...state,
                 matrix: {
-                    ...state.matrix,
-                    start: JSON.parse(JSON.stringify(data.matrix[data.level][1]))
+                    start: JSON.parse(JSON.stringify(data.matrix[data.level][1])),
+                    end: data.matrix[data.level][0]
                 },
                 errors: 0
             }
-    }
-    return state
+        default: 
+            return state
+    }   
 }
 
 

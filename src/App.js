@@ -1,10 +1,10 @@
 import './App.css';
 import Routers from './routers';
 
-function App(props) {
+function App() {
   return (
     <div className="App">
-      <Routers state={props.state} dispach={props.dispach}/>
+      <Routers/>
     </div>
   );
 }
